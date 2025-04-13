@@ -1,30 +1,62 @@
 .PHONY: all clean
 
 # Variables
-PROJECT = $(project)
-LANGUAGE = $(language)
+PROJECT = 2025_Forecast_Project
+LANGUAGE = Python
 
-# Reglas principales
+# Main rules
 all: $(LANGUAGE)
 
 clean:
 	rm -rf $(PROJECT)
-	@echo "Directorio $(PROJECT) eliminado."
+	@echo "Directory $(PROJECT) removed."
 
-# Función para determinar la estructura según el lenguaje
-define create_structure
-    @echo "Creando estructura para $(LANGUAGE)..."
-    mkdir -p $(1)
-    $(2)
-    @echo "Estructura de directorios y archivos para $(LANGUAGE) creada."
+# Function to create day structure
+define create_day_structure
+    @echo "Creating structure for day $(1)..."
+    mkdir -p "$(PROJECT)/$(1)"
+    touch "$(PROJECT)/$(1)/README.md"
+    touch "$(PROJECT)/$(1)/notebook.ipynb"
+    touch "$(PROJECT)/$(1)/exercises.py"
+    touch "$(PROJECT)/$(1)/solutions.py"
+    @echo "Structure created for day $(1)"
 endef
 
 Python:
-	$(call create_structure,$(PROJECT),\
-	    touch $(PROJECT)/main.py \
-	    && mkdir -p $(PROJECT)/tests \
-	    && echo "# $(PROJECT)" > $(PROJECT)/README.md \
-	)
+	mkdir -p $(PROJECT)/data $(PROJECT)/notebooks $(PROJECT)/exercises
+	echo "# Python Forecasting Course" > $(PROJECT)/README.md
+	echo "## Course Structure" >> $(PROJECT)/README.md
+	echo "This course is designed to take you from beginner to expert in forecasting in 30 days." >> $(PROJECT)/README.md
+	$(call create_day_structure,Day01_Introduction_to_Time_Series)
+	$(call create_day_structure,Day02_Exploratory_Time_Series_Analysis)
+	$(call create_day_structure,Day03_Time_Series_Decomposition)
+	$(call create_day_structure,Day04_Evaluation_Metrics)
+	$(call create_day_structure,Day05_Naive_Models)
+	$(call create_day_structure,Day06_Moving_Averages)
+	$(call create_day_structure,Day07_Simple_Exponential_Smoothing)
+	$(call create_day_structure,Day08_Holt_Exponential_Smoothing)
+	$(call create_day_structure,Day09_Winters_Exponential_Smoothing)
+	$(call create_day_structure,Day10_ARIMA_Basic_Concepts)
+	$(call create_day_structure,Day11_ARIMA_Model_Identification)
+	$(call create_day_structure,Day12_ARIMA_Estimation_and_Diagnostics)
+	$(call create_day_structure,Day13_SARIMA)
+	$(call create_day_structure,Day14_Prophet_Introduction)
+	$(call create_day_structure,Day15_Prophet_Components_and_Customization)
+	$(call create_day_structure,Day16_Prophet_Advanced_Use_Cases)
+	$(call create_day_structure,Day17_Neural_Networks_for_Time_Series)
+	$(call create_day_structure,Day18_LSTM_for_Forecasting)
+	$(call create_day_structure,Day19_GRU_for_Forecasting)
+	$(call create_day_structure,Day20_Attention_Models_for_Time_Series)
+	$(call create_day_structure,Day21_Ensemble_Methods)
+	$(call create_day_structure,Day22_Cross_Validation_in_Time_Series)
+	$(call create_day_structure,Day23_Advanced_Feature_Engineering)
+	$(call create_day_structure,Day24_Handling_Missing_Data)
+	$(call create_day_structure,Day25_Anomaly_Detection)
+	$(call create_day_structure,Day26_Probabilistic_Forecasting)
+	$(call create_day_structure,Day27_Hyperparameter_Optimization)
+	$(call create_day_structure,Day28_Model_Deployment)
+	$(call create_day_structure,Day29_Final_Project_Part_1)
+	$(call create_day_structure,Day30_Final_Project_Part_2)
 
 R:
 	$(call create_structure,$(PROJECT),\
